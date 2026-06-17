@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-int main(){
+int main()3{
     float x;
     float y;
 
