@@ -1,0 +1,7 @@
+project('untitled1', 'cpp',
+        version : '1.0.0',
+        default_options : ['warning_level=3', 'cpp_std=c++20'])
+
+untitled1 = executable('untitled1', 'main.cpp', install : true)
+
+test('test', untitled1)
