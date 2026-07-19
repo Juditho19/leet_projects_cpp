@@ -2,6 +2,45 @@
 #include <string>
 
 
+/*
+ *
+* ==================================================
+           BANK MANAGEMENT SYSTEM
+==================================================
+1. Create New Account
+2. Deposit Money
+3. Withdraw Money
+... [Other Menu Options] ...
+Enter your choice (1-13): 1
+
+--------------------------------------------------
+          CREATE NEW BANK ACCOUNT
+--------------------------------------------------
+Enter Customer Full Name: Judith Onyejekwe
+Enter Unique Account Number: ACC-8894
+Enter Account Type (Savings/Current): Savings
+Enter Phone Number: +233 20 123 4567
+Enter National ID Number: GH-9923847-1
+Enter Date Created (DD/MM/YYYY): 13/07/2026
+
+Enter Initial Deposit Amount (Min GHS 100): 45.00
+[ERROR] Initial deposit must be at least GHS 100. Please try again.
+
+Enter Initial Deposit Amount (Min GHS 100): 150.00
+
+--------------------------------------------------
+✔ SUCCESS: Account successfully registered!
+--------------------------------------------------
+Account Holder  : Judith Onyejekwe
+Account Number  : ACC-8894
+Account Type    : Savings
+Current Balance : GHS 150.00
+Account Status  : Active
+--------------------------------------------------
+
+Press Enter to return to the main menu...
+ */
+
 class BankAccount {
    //declaring details
    private:
@@ -16,7 +55,7 @@ class BankAccount {
 
 
    public:
-    //include setters to access prrivate
+    //include setters to access private
     void setName (std::string n) { name = n; }
     void setAccountNumber (std::string acc) { accountNumber = acc; }
     void setAccountType (std::string type) { accountType = type; }
@@ -24,9 +63,7 @@ class BankAccount {
     void setDateCreated (std::string date) { dateCreated = date; }
     void setPhoneNumber (std::string phone) { phoneNumber = phone; }
     void setAccountStatus (std::string status) { accountStatus = status; }
-    void setBalance (double ba) { balance = bal; }
-
-
+    void setBalance (double bal) { balance = bal; }
 
 };
 
