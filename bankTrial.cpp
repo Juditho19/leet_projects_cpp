@@ -1,78 +1,65 @@
 #include <iostream>
 #include <string>
+#include <cctype>
 
 
-/*
- *
-* ==================================================
-           BANK MANAGEMENT SYSTEM
-==================================================
-1. Create New Account
-2. Deposit Money
-3. Withdraw Money
-... [Other Menu Options] ...
-Enter your choice (1-13): 1
 
---------------------------------------------------
-          CREATE NEW BANK ACCOUNT
---------------------------------------------------
-Enter Customer Full Name: Judith Onyejekwe
-Enter Unique Account Number: ACC-8894
-Enter Account Type (Savings/Current): Savings
-Enter Phone Number: +233 20 123 4567
-Enter National ID Number: GH-9923847-1
-Enter Date Created (DD/MM/YYYY): 13/07/2026
-
-Enter Initial Deposit Amount (Min GHS 100): 45.00
-[ERROR] Initial deposit must be at least GHS 100. Please try again.
-
-Enter Initial Deposit Amount (Min GHS 100): 150.00
-
---------------------------------------------------
-✔ SUCCESS: Account successfully registered!
---------------------------------------------------
-Account Holder  : Judith Onyejekwe
-Account Number  : ACC-8894
-Account Type    : Savings
-Current Balance : GHS 150.00
-Account Status  : Active
---------------------------------------------------
-
-Press Enter to return to the main menu...
- */
 
 class BankAccount {
    //declaring details
    private:
-   std::string name;
-   std::string accountNumber;
-   std::string accountType;
-   std::string idNumber;
-   std::string dateCreated;
-   std::string phoneNumber;
-   std::string accountStatus;
-   double balance;
+       std::string name;
+       std::string accountNumber;
+       std::string accountType;
+       std::string idNumber;
+       std::string dateCreated;
+       std::string phoneNumber;
+       std::string accountStatus;
+       double balance;
 
 
    public:
-    //include setters to access private
-    void setName (std::string n) { name = n; }
-    void setAccountNumber (std::string acc) { accountNumber = acc; }
-    void setAccountType (std::string type) { accountType = type; }
-    void setIdNumber (std::string id) { idNumber = id; }
-    void setDateCreated (std::string date) { dateCreated = date; }
-    void setPhoneNumber (std::string phone) { phoneNumber = phone; }
-    void setAccountStatus (std::string status) { accountStatus = status; }
-    void setBalance (double bal) { balance = bal; }
+        //include setters to access private
+        void setName (std::string n) { name = n; }
+        void setAccountNumber (std::string acc) { accountNumber = acc; }
+        void setAccountType (std::string type) { accountType = type; }
+        void setIdNumber (std::string id) { idNumber = id; }
+        void setDateCreated (std::string date) { dateCreated = date; }
+        void setPhoneNumber (std::string phone) { phoneNumber = phone; }
+        void setAccountStatus (std::string status) { accountStatus = status; }
+        void setBalance (double bal) { balance = bal; }
 
+        //chect accountNumber for uniqueness
+        std::string getAccountNumber() const { return accountNumber; }
 };
+
+//helper functions
+//void DepositMoney(){}
+//void WithdrawMoney();
+bool existence(BankAccount accounts[], int currentCount, std::string tatgetNumber ) {
+    //ensure account doesn't already exist
+    for (int i = 0; i < currentCount; i++) {
+        if (accounts[i].getAccountNumber() == tatgetNumber) {
+            return true;
+        }
+    }
+    return false;
+    //no match, doesn't exist so unique
+
+}
+std::string toLowerCase(std::string str) {
+    for (size_t i = 0; i < str.length(); i++) {
+        str[i] = std::tolower(str[i]);
+    }
+    return str;
+}
 
 
 
 
 //CreateAccount class
 void CreateAccount(BankAccount accounts[], int& currentCount){
-    accounts[currentCount].setStatus("Active");
+    // accounts[currentCount].setStatus("Active");
 
    std::string tempName;
    std::string tempAccountNumber;
@@ -88,21 +75,52 @@ void CreateAccount(BankAccount accounts[], int& currentCount){
     std::cin.ignore();
    std::getline(std::cin, tempName);
 
-    std::cout<<"Enter Account Number:"<<'\n';
-    std::cin>>tempAccountNumber;
-    //verify if account is unique
-    tempAccountType.existence();
+
+    do {
+        std::cout<<"Enter Account Number:"<<'\n';
+        std::cin>>tempAccountNumber;
+        //verify if account is unique
+        if (existence(accounts, currentCount, tempAccountNumber)) {
+            std::cout<<"Account Number Exists. Please try again"<<'\n';
+        }
+        else {
+            break;
+        }
+
+        //later add conditions to only allow proper accounts
+
+    }while(true);
 
 
 
-   std::cout<<"Enter Account Type (Savings/Current):"<<'\n';
-   std::cin>>tempAccountType;
+
+    do {
+        std::cout<<"Enter Account Type (Savings/Current):"<<'\n';
+        std::cin>>tempAccountType;
+        //convert to lower case
+        std::string lowerType = toLowerCase(tempAccountType);
+        if (lowerType != "savings" && lowerType != "current") {
+            std::cout<<"[ERROR] Invalid Account Type. Please try again."<<'\n';
+        }
+        else {
+            std::cout << "success\n";
+            break;
+
+        }
+
+
+    }while (true);
+
+
+
+//add verifications for the numbers later
    std::cout<<"Enter Phone Number:"<<'\n';
    std::cin>>tempPhoneNumber;
    std::cout<<"Enter National ID Number:"<<'\n';
    std::cin>>tempIdNumber;
    std::cout<<"Enter Date Created (DD/MM/YYYY):"<<'\n';
    std::cin>>tempDateCreated;
+
 
 
     do {
@@ -118,9 +136,7 @@ void CreateAccount(BankAccount accounts[], int& currentCount){
 
 
 }
-//void DepositMoney(){}
-//void WithdrawMoney();
-bool existence();//create verification code
+
 
 int main() {
 
