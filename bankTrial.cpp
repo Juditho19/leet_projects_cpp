@@ -133,7 +133,20 @@ void CreateAccount(BankAccount accounts[], int& currentCount){
 
     }while (tempBalance < 100);
 
+    //update account details
+    accounts[currentCount].setName(tempName);
+    accounts[currentCount].setAccountNumber(tempAccountNumber);
+    accounts[currentCount].setAccountType(tempAccountType);
+    accounts[currentCount].setPhoneNumber(tempPhoneNumber);
+    accounts[currentCount].setIdNumber(tempIdNumber);
+    accounts[currentCount].setDateCreated(tempDateCreated);
+    accounts[currentCount].setBalance(tempBalance);
+    accounts[currentCount].setAccountStatus("Active");
 
+    //increase count
+    currentCount++;
+
+    std::cout << "\n SUCCESS: Account successfully registered!\n\n";
 
 }
 
